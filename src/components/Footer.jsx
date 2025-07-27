@@ -76,7 +76,7 @@ export default function Footer() {
 
       <div className="flex flex-col-reverse md:flex-row gap-6 items-center md:justify-between">
         <p className="text-md text-center md:text-left">
-          &copy; 2024 Anhar Khoirun Najib. All rights reserved.
+          &copy; 2025 Anhar Khoirun Najib. All rights reserved.
         </p>
 
         <div className="flex items-center space-x-5 justify-center md:justify-normal text-white">

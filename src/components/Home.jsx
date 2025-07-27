@@ -4,7 +4,7 @@ export default function Home() {
   return (
     <section
       id="home"
-      className="min-h-screen flex flex-col-reverse md:flex-row items-center md:justify-between justify-around px-6 md:px-12 bg-gray-100 text-slate-800 pt-20 md:pb-20 pb-10 md:gap-20"
+      className="md:min-h-screen flex flex-col-reverse md:flex-row items-center md:justify-between px-6 md:px-12 bg-gray-100 text-slate-800 pt-20 md:pb-20 pb-10 md:gap-20"
     >
       <div className="w-full md:w-2/3 text-left md:space-y-6 space-y-4">
         <h1 className="text-2xl md:text-4xl font-extrabold">
@@ -46,7 +46,7 @@ export default function Home() {
         </a>
       </div>
 
-      <div className="w-full md:w-1/3 flex justify-center">
+      <div className="w-full md:w-1/3 flex justify-center md:mb-0 mb-6">
         <div
           className="relative w-[85%] md:w-80 overflow-hidden md:shadow-xl shadow-md border-[6px] border-white"
         >
