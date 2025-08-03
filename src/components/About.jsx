@@ -10,19 +10,19 @@ const SocialIcon = [
         Icon: FaLinkedin,
     },
     {
-        href: "https://github.com/anharkhoirun",
+        href: "https://github.com/Anhar12",
         Icon: FaGithub,
     },
     {
-        href: "https://wa.me/6281234567890",
+        href: "https://wa.me/085845723207",
         Icon: FaWhatsapp,
     },
     {
-        href: "https://www.instagram.com/anharkhoirun/",
+        href: "https://www.instagram.com/anharrrrrr_",
         Icon: FaInstagram,
     },
     {
-        href: "https://www.facebook.com/anharkhoirun/",
+        href: "https://www.facebook.com/anhar.najib",
         Icon: FaFacebookF,
     },
 ]

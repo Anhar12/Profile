@@ -90,10 +90,10 @@ export default function Contact() {
       id="contact"
       className="bg-white text-slate-800 py-10 md:py-20 relative"
     >
-      <div className='flex flex-col items-center relative z-30 md:w-1/2 w-[90%] mx-auto bg-white p-8 border border-slate-400 rounded'>
+      <div className='flex flex-col items-center relative z-30 md:w-1/2 w-[90%] mx-auto bg-white/70 backdrop-blur md:p-8 p-6 border border-slate-400 rounded'>
         <div className="flex flex-col justify-center text-center mb-6">
           <h2 className="text-2xl md:text-4xl font-extrabold uppercase text-sky-600">CONTACT ME</h2>
-          <p className="mt-2 text-slate-500">Get in touch with me for any questions or collaboration opportunities.</p>
+          <p className="mt-2 text-slate-500 md:text-md text-sm">Get in touch with me for any questions or collaboration opportunities.</p>
         </div>
 
         <div className='w-full'>

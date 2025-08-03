@@ -74,7 +74,7 @@ export default function Header() {
       )}
 
       <aside
-        className={`fixed top-[64px] bg-white backdrop-blur left-0 h-full w-48 z-50 transform transition-transform duration-300 ${
+        className={`fixed top-[64px] bg-white backdrop-blur left-0 h-full w-48 z-40 transform transition-transform duration-300 ${
           isSidebarOpen ? "translate-x-0" : "-translate-x-full"
         }`}
       >
