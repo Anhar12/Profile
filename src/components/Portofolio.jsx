@@ -8,54 +8,54 @@ import kukarImage from '../assets/logokukar.png';
 const portfolioItems = [
   {
     title: 'SHIELD',
-    titleFull : 'Shipping Health Integrated Electronic Data (SHIELD)',
+    titleFull: 'Shipping Health Integrated Electronic Data (SHIELD)',
     description:
-      "A web-based Medical Check-Up (MCU) system for seafarers, vendors, and company doctors. Enables registration, examination, result uploads, and verification - PT. Pertamina International Shipping.",
+      'A web-based Medical Check-Up (MCU) system for seafarers, vendors, and company doctors. Enables registration, examination, result uploads, and verification - PT. Pertamina International Shipping.',
     image: pisImage,
     tags: ['ASP.Net', 'SQL Server', 'ASP.Net Maker'],
     link: 'https://apps.pertamina.com/shield/Login',
   },
   {
     title: 'S&D One',
-    titleFull : 'S&D One',
+    titleFull: 'S&D One',
     description:
-      "An integrated platform for recording and monitoring all processes and activities within PT. Pertamina Patra Niaga. Designed to enhance operational transparency, accountability, and efficiency across departments.",
+      'An integrated platform for recording and monitoring all processes and activities within PT. Pertamina Patra Niaga. Designed to enhance operational transparency, accountability, and efficiency across departments.',
     image: sndImage,
     tags: ['ASP.Net', 'SQL Server', 'ASP.Net Maker'],
     link: 'https://ppn.mitralapps.com/sndone/login',
   },
   {
     title: 'DISHCOVER',
-    titleFull : 'DISHCOVER',
+    titleFull: 'DISHCOVER',
     description:
-      "An Android app that recommends cooking recipes based on food ingredient images. Uses image recognition to identify ingredients and suggest suitable dishes instantly.",
+      'An Android app that recommends cooking recipes based on food ingredient images. Uses image recognition to identify ingredients and suggest suitable dishes instantly.',
     image: dishcoverImage,
     tags: ['Node.js', 'Express.js', 'Kotlin', 'CNN', 'Google Cloud'],
     link: 'https://github.com/Project-Dishcover',
   },
   {
     title: 'UjangsTech',
-    titleFull : 'UjangsTech',
+    titleFull: 'UjangsTech',
     description:
-      "An Android-based IoT application for real-time air quality monitoring using ESP32, Antares broker, and MQTT protocol. Provides live sensor data and environmental insights.",
+      'An Android-based IoT application for real-time air quality monitoring using ESP32, Antares broker, and MQTT protocol. Provides live sensor data and environmental insights.',
     image: ujangImage,
     tags: ['Kodular', 'Antares', 'ESP 32', 'Google Cloud'],
     link: 'https://github.com/Anhar12/UAS-IOT',
   },
   {
     title: 'Fire Alarm',
-    titleFull : 'Fire Alarm',
+    titleFull: 'Fire Alarm',
     description:
-      "An Android-based IoT fire alarm system that detects indoor fire and identifies the presence of living beings in the room, ensuring early warnings and safety alerts.",
+      'An Android-based IoT fire alarm system that detects indoor fire and identifies the presence of living beings in the room, ensuring early warnings and safety alerts.',
     image: fireImage,
     tags: ['Kodular', 'MQTT', 'ESP 32'],
     link: 'https://github.com/Anhar12/pa-praktikum-iot-unmul-b4',
   },
   {
     title: 'Village Profile',
-    titleFull : 'Teluk Dalam Village Profile',
+    titleFull: 'Teluk Dalam Village Profile',
     description:
-      "A responsive profile website for Kelurahan Teluk Dalam, providing public information, news, and services to support community engagement and transparency.",
+      'A responsive profile website for Kelurahan Teluk Dalam, providing public information, news, and services to support community engagement and transparency.',
     image: kukarImage,
     tags: ['Javascript', 'Tailwind', 'Vercel'],
     link: 'https://www.telukdalam.my.id/',
@@ -73,9 +73,9 @@ export default function Portfolio() {
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 justify-center">
           {portfolioItems.map((item, idx) => (
-            <div key={idx} className="relative group overflow-hidden rounded-xl shadow-sm hover:shadow-lg transition-all duration-300 border border-slate-200 cursor-pointer">
+            <div key={idx} className="relative group overflow-hidden rounded-lg shadow-sm hover:shadow-lg transition-all duration-300 border border-slate-200 cursor-pointer">
               {/* Gambar */}
-              <img src={item.image} alt={item.title} className="w-full h-64 object-cover" />
+              <img src={item.image} alt={item.title} className="w-full h-64 object-cover" loading='lazy'/>
 
               {/* Judul (di luar overlay) */}
               <div className="absolute bottom-0 left-0 w-full bg-gradient-to-t from-sky-800/70 via-sky-800/50 to-transparent px-4 pt-3 pb-1 group-hover:opacity-0 transition-opacity duration-300">

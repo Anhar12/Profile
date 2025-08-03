@@ -70,20 +70,20 @@ export default function Header() {
       </header>
 
       {isSidebarOpen && (
-        <div onClick={closeSidebar} className="fixed inset-0 bg-black/50 z-30"></div>
+        <div onClick={closeSidebar} className="fixed inset-0 bg-black/50 z-40"></div>
       )}
 
       <aside
-        className={`fixed top-[64px] py-6 bg-white backdrop-blur left-0 h-full w-64 z-40 transform transition-transform duration-300 ${
+        className={`fixed top-[64px] bg-white backdrop-blur left-0 h-full w-48 z-50 transform transition-transform duration-300 ${
           isSidebarOpen ? "translate-x-0" : "-translate-x-full"
         }`}
       >
-        <nav className="flex flex-col gap-6 px-6 font-semibold text-slate-800">
+        <nav className="flex flex-col px-6 font-semibold text-slate-800">
           {["Home", "About", "Portfolio", "Contact"].map((item, idx) => (
             <a
               key={idx}
               href={`#${item.toLowerCase()}`}
-              className="hover:text-sky-600 transition"
+              className="hover:text-sky-600 transition border-b border-slate-400 py-4 px-2"
               onClick={closeSidebar}
             >
               {item}

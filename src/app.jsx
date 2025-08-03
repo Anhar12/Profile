@@ -3,6 +3,7 @@ import Home from './components/Home.jsx';
 import About from './components/About.jsx';
 import Portofolio from './components/Portofolio.jsx';
 import Footer from './components/Footer.jsx';
+import Contact from './components/Contact.jsx';
 
 export default function App() {
   return (
@@ -12,6 +13,7 @@ export default function App() {
         <Home />
         <About />
         <Portofolio />
+        <Contact />
       </main>
       <Footer />
     </div>

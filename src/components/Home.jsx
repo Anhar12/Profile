@@ -54,6 +54,7 @@ export default function Home() {
             src={anharImg}
             alt="Anhar Khoirun Najib"
             className="object-cover w-full h-full"
+            loading='lazy'
           />
         </div>
       </div>

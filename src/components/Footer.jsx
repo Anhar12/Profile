@@ -1,45 +1,45 @@
 import { FaEnvelope, FaLinkedin, FaGithub, FaWhatsapp, FaInstagram, FaFacebookF } from "react-icons/fa";
 
 const Categories = [
-    'Programming',
-    'Web Developer',
-    'Cloud Computing',
-    'Artificial Intelligence',
-    'Technology'
+  'Programming',
+  'Web Developer',
+  'Cloud Computing',
+  'Artificial Intelligence',
+  'Technology'
 ]
 
 const Links = [
-    'Home',
-    'About',
-    'Portofolio',
-    'Contact'
+  'Home',
+  'About',
+  'Portofolio',
+  'Contact'
 ]
 
 const SocialIcon = [
-    {
-        href: "mailto:anharkhoirun@gmail.com",
-        Icon: FaEnvelope,
-    },
-    {
-        href: "https://www.linkedin.com/in/anhar-khoirun-najib-96956621a/",
-        Icon: FaLinkedin,
-    },
-    {
-        href: "https://github.com/anharkhoirun",
-        Icon: FaGithub,
-    },
-    {
-        href: "https://wa.me/6281234567890",
-        Icon: FaWhatsapp,
-    },
-    {
-        href: "https://www.instagram.com/anharkhoirun/",
-        Icon: FaInstagram,
-    },
-    {
-        href: "https://www.facebook.com/anharkhoirun/",
-        Icon: FaFacebookF,
-    },
+  {
+    href: "mailto:anharkhoirun@gmail.com",
+    Icon: FaEnvelope,
+  },
+  {
+    href: "https://www.linkedin.com/in/anhar-khoirun-najib-96956621a/",
+    Icon: FaLinkedin,
+  },
+  {
+    href: "https://github.com/anharkhoirun",
+    Icon: FaGithub,
+  },
+  {
+    href: "https://wa.me/6281234567890",
+    Icon: FaWhatsapp,
+  },
+  {
+    href: "https://www.instagram.com/anharkhoirun/",
+    Icon: FaInstagram,
+  },
+  {
+    href: "https://www.facebook.com/anharkhoirun/",
+    Icon: FaFacebookF,
+  },
 ]
 
 export default function Footer() {
@@ -84,7 +84,7 @@ export default function Footer() {
             <a
               key={index}
               href={item.href}
-              className="w-9 h-9 rounded-full flex justify-center items-center border border-white hover:shadow-lg hover:bg-white hover:text-primary transition-colors duration-300"
+              className="w-10 h-10 rounded-full flex justify-center items-center border border-white hover:shadow-lg hover:bg-white hover:text-primary transition-colors duration-300"
               target="_blank"
               rel="noopener noreferrer"
             >
@@ -96,4 +96,3 @@ export default function Footer() {
     </footer>
   );
 }
-
