@@ -1,6 +1,4 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
 
 html,
 body,
@@ -32,4 +30,20 @@ body {
 
 .hamburger-active > span:nth-child(3) {
   transform: rotate(-45deg);
+}
+
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: #fff;
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(to bottom, #38bdf8, #0ea5e9, #2563eb);
+}
+
+.swal2-confirm {
+  background: #0ea5e9 !important;
 }

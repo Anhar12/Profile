@@ -1,4 +1,4 @@
-import { useRef } from 'react';
+import { useRef, useState } from "react";
 import emailjs from '@emailjs/browser';
 import Swal from 'sweetalert2';
 import Wave1 from '../assets/wave1.png'
@@ -56,34 +56,36 @@ export default function Contact() {
     });
   };
 
-  $(document).ready(function () {
-    let inputMap = [
-      '#name',
-      '#email',
-      '#title'
-    ];
+  const fields = [
+    { id: "name", type: "text", icon: "fa-user", label: "Name" },
+    { id: "email", type: "email", icon: "fa-at", label: "Email" },
+    { id: "title", type: "text", icon: "fa-pen-to-square", label: "Title" },
+  ];
 
-    inputMap.forEach(selector => {
-      const input = $(selector);
-
-      input.on('change', function () {
-        const val = $(this).val();
-        const label = $(this).prev();
-
-        if (val) {
-          label.addClass('top-0 px-1 text-xs left-[-4px]').removeClass('top-1/2 text-sm left-0');
-        } else {
-          label.removeClass('top-0 px-1 text-xs left-[-4px]').addClass('top-1/2 text-sm left-0');
-        }
-      });
-
-      const icon = input.next();
-
-      icon.on('click', function () {
-        input.focus();
-      });
-    });
+  const [values, setValues] = useState({
+    name: "",
+    email: "",
+    title: "",
   });
+
+  const refs = {
+    name: useRef(),
+    email: useRef(),
+    title: useRef(),
+  };
+
+  const handleChange = (e) => {
+    setValues((prev) => ({
+      ...prev,
+      [e.target.name]: e.target.value,
+    }));
+  };
+
+  const handleIconClick = (field) => {
+    refs[field].current.focus();
+  };
+
+  const isFilled = (key) => values[key]?.length > 0;
 
   return (
     <section
@@ -98,33 +100,44 @@ export default function Contact() {
 
         <div className='w-full'>
           <form ref={form} onSubmit={sendEmail} autoComplete='off' className='space-y-4'>
-            <div class="relative group">
-              <label for="name" class="text-gray-500 text-md absolute transition-all duration-300 transform -translate-y-1/2 top-1/2 left-0 mx-4 bg-white group-focus-within:top-0 group-focus-within:left-[-4px] group-focus-within:text-xs group-focus-within:px-1 group-focus-within:text-sky-600">Name</label>
-              <input required type="text" id="name" name="name" class="w-full py-2 px-4 ring-2 ring-gray-300 outline-none focus:ring-sky-500 text-md"></input>
-              <span class="absolute right-0 top-1/2 transform -translate-y-1/2 text-gray-500 group-focus-within:text-sky-600 p-2 cursor-pointer transition-all duration-300">
-                <i class="fa-solid fa-user"></i>
-              </span>
-            </div>
+            {fields.map(({ id, type, icon, label }) => {
+              return (
+                <div key={id} className="relative group">
+                  <label
+                    htmlFor={id}
+                    className={`text-gray-500 text-md absolute transition-all duration-300 transform -translate-y-1/2 mx-4 bg-white group-focus-within:top-0 group-focus-within:left-[-4px] group-focus-within:text-xs group-focus-within:px-1 group-focus-within:text-sky-600 ${
+                      isFilled(id)
+                        ? 'top-0 left-[-4px] px-1 text-xs'
+                        : 'top-1/2 left-0 -translate-y-1/2'
+                    }`}
+                  >
+                    {label}
+                  </label>
+
+                  <input
+                    ref={refs[id]}
+                    required
+                    type={type}
+                    id={id}
+                    name={id}
+                    value={values[id]}
+                    onChange={handleChange}
+                    className='w-full py-2 px-4 ring-2 ring-gray-300 outline-none focus:ring-sky-500 text-md'
+                  />
+
+                  <span
+                    onClick={() => handleIconClick(id)}
+                    className='absolute right-0 top-1/2 transform -translate-y-1/2 text-gray-500 group-focus-within:text-sky-600 p-2 cursor-pointer transition-all duration-300'
+                  >
+                    <i className={`fa-solid ${icon}`}></i>
+                  </span>
+                </div>
+              );
+            })}
 
             <div class="relative group">
-              <label for="email" class="text-gray-500 text-md absolute transition-all duration-300 transform -translate-y-1/2 top-1/2 left-0 mx-4 bg-white group-focus-within:top-0 group-focus-within:left-[-4px] group-focus-within:text-xs group-focus-within:px-1 group-focus-within:text-sky-600">Email</label>
-              <input required type="email" id="email" name="email" class="w-full py-2 px-4 ring-2 ring-gray-300 outline-none focus:ring-sky-500 text-md"></input>
-              <span class="absolute right-0 top-1/2 transform -translate-y-1/2 text-gray-500 group-focus-within:text-sky-600 p-2 cursor-pointer transition-all duration-300">
-                <i class="fa-solid fa-at"></i>
-              </span>
-            </div>
-
-            <div class="relative group">
-              <label for="title" class="text-gray-500 text-md absolute transition-all duration-300 transform -translate-y-1/2 top-1/2 left-0 mx-4 bg-white group-focus-within:top-0 group-focus-within:left-[-4px] group-focus-within:text-xs group-focus-within:px-1 group-focus-within:text-sky-600">Title</label>
-              <input required type="text" id="title" name="title" class="w-full py-2 px-4 ring-2 ring-gray-300 outline-none focus:ring-sky-500 text-md"></input>
-              <span class="absolute right-0 top-1/2 transform -translate-y-1/2 text-gray-500 group-focus-within:text-sky-600 p-2 cursor-pointer transition-all duration-300">
-                <i class="fa-solid fa-pen-to-square"></i>
-              </span>
-            </div>
-
-            <div class="relative group space-y-1">
               <label for="message" class="text-gray-500 text-md transition-all duration-300 transform group-focus-within:text-sky-600">Message</label>
-              <textarea required id="message" name="message" class="w-full py-2 px-4 ring-2 ring-gray-300 outline-none focus:ring-sky-500 text-md" rows="3"></textarea>
+              <textarea required id="message" name="message" class="w-full py-2 px-4 ring-2 mt-1 ring-gray-300 outline-none focus:ring-sky-500 text-md" rows="3"></textarea>
             </div>
 
             <button
@@ -150,15 +163,15 @@ export default function Contact() {
       </div>
 
       <div className='absolute bottom-0 w-full text-sky-300 z-20'>
-        <img src={Wave1} className='w-full h-[300px] object-cover' />
+        <img src={Wave1} className='w-full h-[300px]' />
       </div>
 
       <div className='absolute bottom-[30px] z-10 w-full text-sky-300'>
-        <img src={Wave2} className='w-full h-[300px] object-cover' />
+        <img src={Wave2} className='w-full h-[300px]' />
       </div>
 
       <div className='absolute bottom-[60px] z-0 w-full text-sky-300'>
-        <img src={Wave3} className='w-full h-[300px] object-cover' />
+        <img src={Wave3} className='w-full h-[300px]' />
       </div>
 
       <div id='loading-spinner' className="fixed top-0 left-0 w-full hidden h-full justify-center items-center bg-slate-900/50 z-[70]">
