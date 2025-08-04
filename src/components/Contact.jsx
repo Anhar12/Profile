@@ -6,55 +6,8 @@ import Wave2 from '../assets/wave2.png'
 import Wave3 from '../assets/wave3.png'
 
 export default function Contact() {
+  const [isLoading, setLoading] = useState(false);
   const form = useRef();
-
-  const sendEmail = (e) => {
-    e.preventDefault();
-
-    $('#loading-spinner').removeClass('hidden').addClass('flex');
-
-    const formData = new FormData(form.current);
-    const formProps = Object.fromEntries(formData);
-
-    if (!formProps.name || !formProps.email || !formProps.title || !formProps.message) {
-      $('#loading-spinner').removeClass('flex').addClass('hidden');
-      Swal.fire({
-        icon: "error",
-        title: "Failed to send email! Please fill all the fields."
-      });
-      return;
-    }
-
-    Promise.all([
-      emailjs.sendForm(
-        'service_if86g2g',
-        'template_e8a7s2s',
-        form.current,
-        'EnEeqx7BWGL1z34ia'
-      ),
-      emailjs.sendForm(
-        'service_if86g2g',
-        'template_bc6yb2m',
-        form.current,
-        'EnEeqx7BWGL1z34ia'
-      )
-    ]).then(() => {
-      $('#loading-spinner').removeClass('flex').addClass('hidden');
-      form.current.reset();
-      $('label').removeClass('top-0 px-1 text-xs left-[-4px]').addClass('top-1/2 text-sm left-0');
-      Swal.fire({
-        icon: "success",
-        title: "Email sent successfully!"
-      });
-    }).catch((error) => {
-      $('#loading-spinner').removeClass('flex').addClass('hidden');
-      Swal.fire({
-        icon: "error",
-        title: "Failed to send email! Please try again later."
-      });
-      console.error(error);
-    });
-  };
 
   const fields = [
     { id: "name", type: "text", icon: "fa-user", label: "Name" },
@@ -87,6 +40,58 @@ export default function Contact() {
 
   const isFilled = (key) => values[key]?.length > 0;
 
+  const sendEmail = (e) => {
+    e.preventDefault();
+
+    setLoading(true);
+
+    const formData = new FormData(form.current);
+    const formProps = Object.fromEntries(formData);
+
+    if (!formProps.name || !formProps.email || !formProps.title || !formProps.message) {
+      setLoading(false);
+      Swal.fire({
+        icon: "error",
+        title: "Failed to send email! Please fill all the fields."
+      });
+      return;
+    }
+
+    Promise.all([
+      emailjs.sendForm(
+        'service_if86g2g',
+        'template_e8a7s2s',
+        form.current,
+        'EnEeqx7BWGL1z34ia'
+      ),
+      emailjs.sendForm(
+        'service_if86g2g',
+        'template_bc6yb2m',
+        form.current,
+        'EnEeqx7BWGL1z34ia'
+      )
+    ]).then(() => {
+      setLoading(false);
+      form.current.reset();
+      setValues({
+        name: "",
+        email: "",
+        title: "",
+      });
+      Swal.fire({
+        icon: "success",
+        title: "Email sent successfully!"
+      });
+    }).catch((error) => {
+      setLoading(false);
+      Swal.fire({
+        icon: "error",
+        title: "Failed to send email! Please try again later."
+      });
+      console.error(error);
+    });
+  };
+
   return (
     <section
       id="contact"
@@ -105,11 +110,10 @@ export default function Contact() {
                 <div key={id} className="relative group">
                   <label
                     htmlFor={id}
-                    className={`text-gray-500 text-md absolute transition-all duration-300 transform -translate-y-1/2 mx-4 bg-white group-focus-within:top-0 group-focus-within:left-[-4px] group-focus-within:text-xs group-focus-within:px-1 group-focus-within:text-sky-600 ${
-                      isFilled(id)
+                    className={`text-gray-500 text-md absolute transition-all duration-300 transform -translate-y-1/2 mx-4 bg-white group-focus-within:top-0 group-focus-within:left-[-4px] group-focus-within:text-xs group-focus-within:px-1 group-focus-within:text-sky-600 ${isFilled(id)
                         ? 'top-0 left-[-4px] px-1 text-xs'
                         : 'top-1/2 left-0 -translate-y-1/2'
-                    }`}
+                      }`}
                   >
                     {label}
                   </label>
@@ -122,7 +126,7 @@ export default function Contact() {
                     name={id}
                     value={values[id]}
                     onChange={handleChange}
-                    className='w-full py-2 px-4 ring-2 ring-gray-300 outline-none focus:ring-sky-500 text-md'
+                    className='w-full py-2 px-4 ring-1 ring-gray-500 outline-none focus:ring-sky-500 text-md'
                   />
 
                   <span
@@ -137,12 +141,12 @@ export default function Contact() {
 
             <div class="relative group">
               <label for="message" class="text-gray-500 text-md transition-all duration-300 transform group-focus-within:text-sky-600">Message</label>
-              <textarea required id="message" name="message" class="w-full py-2 px-4 ring-2 mt-1 ring-gray-300 outline-none focus:ring-sky-500 text-md" rows="3"></textarea>
+              <textarea required id="message" name="message" class="w-full py-2 px-4 ring-1 mt-1 ring-gray-500 outline-none focus:ring-sky-500 text-md" rows="3"></textarea>
             </div>
 
             <button
               type="submit"
-              className='inline-flex w-full gap-4 justify-center relative md:px-6 md:py-3 px-4 py-2 font-semibold text-white
+              className='inline-flex w-full gap-4 justify-center relative md:px-6 md:py-3 px-4 py-2 font-semibold text-white cursor-pointer
                 bg-sky-500 transition-all duration-300 overflow-hidden group
                 shadow-[0_4px_10px_rgba(0,0,0,0.2)] hover:shadow-lg hover:scale-[1.02] active:scale-[0.98]
                 ring-1 ring-sky-400/40 hover:ring-blue-500/50'
@@ -174,7 +178,12 @@ export default function Contact() {
         <img src={Wave3} className='w-full h-[300px] object-cover md:object-fill' />
       </div>
 
-      <div id='loading-spinner' className="fixed top-0 left-0 w-full hidden h-full justify-center items-center bg-slate-900/50 z-[70]">
+      <div id='loading-spinner' className={`fixed top-0 left-0 w-full h-full justify-center items-center bg-slate-900/50 z-[70] ${
+        isLoading ?
+          'flex' 
+          :
+          'hidden'
+      }`}>
         <div role="status">
           <svg aria-hidden="true" className="w-10 h-10 text-gray-200 animate-spin dark:text-gray-600 fill-sky-600" viewBox="0 0 100 101" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path d="M100 50.5908C100 78.2051 77.6142 100.591 50 100.591C22.3858 100.591 0 78.2051 0 50.5908C0 22.9766 22.3858 0.59082 50 0.59082C77.6142 0.59082 100 22.9766 100 50.5908ZM9.08144 50.5908C9.08144 73.1895 27.4013 91.5094 50 91.5094C72.5987 91.5094 90.9186 73.1895 90.9186 50.5908C90.9186 27.9921 72.5987 9.67226 50 9.67226C27.4013 9.67226 9.08144 27.9921 9.08144 50.5908Z" fill="currentColor" />

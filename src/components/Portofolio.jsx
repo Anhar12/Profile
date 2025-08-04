@@ -71,11 +71,11 @@ export default function Portfolio() {
           <p className="mt-2 text-slate-500">Some of the projects I've built.</p>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 justify-center">
+        <div className="grid grid-cols-2 md:grid-cols-3 gap-4 md:gap-8 justify-center">
           {portfolioItems.map((item, idx) => (
             <div key={idx} className="relative group overflow-hidden rounded-lg shadow-sm hover:shadow-lg transition-all duration-300 border border-slate-200 cursor-pointer">
               {/* Gambar */}
-              <img src={item.image} alt={item.title} className="w-full h-64 object-cover" loading='lazy'/>
+              <img src={item.image} alt={item.title} className="w-full h-52 md:h-64 object-cover" loading='lazy'/>
 
               {/* Judul (di luar overlay) */}
               <div className="absolute bottom-0 left-0 w-full bg-gradient-to-t from-sky-800/70 via-sky-800/50 to-transparent px-4 pt-3 pb-1 group-hover:opacity-0 transition-opacity duration-300">
@@ -99,7 +99,7 @@ export default function Portfolio() {
                 
                 <a
                   href={item.link}
-                  className="relative inline-block border-b-[1.5px] border-white text-white flex gap-2 items-center transition-all duration-300 bg-gradient-to-r from-sky-300 to-sky-300 bg-[length:0%_100%] bg-left bg-no-repeat hover:bg-[length:100%_100%] hover:text-transparent bg-clip-text bg-white hover:border-sky-300"
+                  className="relative border-b-[1.5px] border-white text-white flex gap-2 items-center transition-all duration-300 bg-gradient-to-r from-sky-300 to-sky-300 bg-[length:0%_100%] bg-left bg-no-repeat hover:bg-[length:100%_100%] hover:text-transparent bg-clip-text bg-white hover:border-sky-300"
                 >
                   View Project <i className="fa-solid fa-arrow-right"></i>
                 </a>

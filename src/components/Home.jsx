@@ -48,7 +48,7 @@ export default function Home() {
 
       <div className="w-full md:w-1/3 flex justify-center md:mb-0 mb-6">
         <div
-          className="relative w-[85%] md:w-80 overflow-hidden md:shadow-xl shadow-md border-[6px] border-white"
+          className="relative w-[85%] md:w-90 overflow-hidden md:shadow-xl shadow-md border-[6px] border-white"
         >
           <img
             src={anharImg}
