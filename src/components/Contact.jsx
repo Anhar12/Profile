@@ -163,15 +163,15 @@ export default function Contact() {
       </div>
 
       <div className='absolute bottom-0 w-full text-sky-300 z-20'>
-        <img src={Wave1} className='w-full h-[300px]' />
+        <img src={Wave1} className='w-full h-[300px] object-cover md:object-fill' />
       </div>
 
       <div className='absolute bottom-[30px] z-10 w-full text-sky-300'>
-        <img src={Wave2} className='w-full h-[300px]' />
+        <img src={Wave2} className='w-full h-[300px] object-cover md:object-fill' />
       </div>
 
       <div className='absolute bottom-[60px] z-0 w-full text-sky-300'>
-        <img src={Wave3} className='w-full h-[300px]' />
+        <img src={Wave3} className='w-full h-[300px] object-cover md:object-fill' />
       </div>
 
       <div id='loading-spinner' className="fixed top-0 left-0 w-full hidden h-full justify-center items-center bg-slate-900/50 z-[70]">
