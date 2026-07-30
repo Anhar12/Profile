@@ -1,6 +1,6 @@
 import { FaEnvelope, FaFacebookF, FaGithub, FaInstagram, FaLinkedin, FaWhatsapp } from 'react-icons/fa';
 import { HiArrowNarrowUp, HiLocationMarker, HiPhone } from 'react-icons/hi';
-import anharImage from '../assets/Anhar3.jpg';
+import anharImage from '../assets/Anhar4.jpg';
 
 const socials = [
   { href: 'mailto:anharkhoirun@gmail.com', Icon: FaEnvelope, label: 'Email' },

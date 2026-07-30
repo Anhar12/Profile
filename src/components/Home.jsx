@@ -1,5 +1,5 @@
 import { HiArrowDown, HiArrowNarrowUp } from 'react-icons/hi';
-import anharImg from '../assets/Anhar4.jpg';
+import anharImg from '../assets/Anhar3.jpg';
 
 export default function Home() {
   return (
