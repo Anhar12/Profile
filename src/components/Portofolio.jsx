@@ -1,3 +1,4 @@
+import { HiArrowRight, HiExternalLink, HiMap } from 'react-icons/hi';
 import pisImage from '../assets/pis.jpeg';
 import sndImage from '../assets/snd.png';
 import dishcoverImage from '../assets/dishcover.jpeg';
@@ -5,108 +6,109 @@ import ujangImage from '../assets/ujangtech.png';
 import fireImage from '../assets/Fire.jpg';
 import kukarImage from '../assets/logokukar.png';
 
+// Portfolio entries are intentionally kept as data, so new work only needs one object.
 const portfolioItems = [
   {
     title: 'SHIELD',
-    titleFull: 'Shipping Health Integrated Electronic Data (SHIELD)',
-    description:
-      'A web-based Medical Check-Up (MCU) system for seafarers, vendors, and company doctors. Enables registration, examination, result uploads, and verification - PT. Pertamina International Shipping.',
+    subtitle: 'Shipping Health Integrated Electronic Data',
+    description: 'A web-based Medical Check-Up system for seafarers, vendors, and company doctors. Enables registration, examination, result uploads, and verification for PT. Pertamina International Shipping.',
     image: pisImage,
     tags: ['ASP.Net', 'SQL Server', 'ASP.Net Maker'],
     link: 'https://apps.pertamina.com/shield/Login',
+    color: '#c66a45',
   },
   {
     title: 'S&D One',
-    titleFull: 'S&D One',
-    description:
-      'An integrated platform for recording and monitoring all processes and activities within PT. Pertamina Patra Niaga. Designed to enhance operational transparency, accountability, and efficiency across departments.',
+    subtitle: 'Integrated operational platform',
+    description: 'A platform for recording and monitoring processes and activities at PT. Pertamina Patra Niaga, designed to improve operational transparency, accountability, and efficiency.',
     image: sndImage,
     tags: ['ASP.Net', 'SQL Server', 'ASP.Net Maker'],
     link: 'https://ppn.mitralapps.com/sndone/login',
+    color: '#d9a441',
   },
   {
     title: 'DISHCOVER',
-    titleFull: 'DISHCOVER',
-    description:
-      'An Android app that recommends cooking recipes based on food ingredient images. Uses image recognition to identify ingredients and suggest suitable dishes instantly.',
+    subtitle: 'Recipe discovery through vision',
+    description: 'An Android app that recommends cooking recipes from food ingredient images, using image recognition to identify ingredients and suggest suitable dishes.',
     image: dishcoverImage,
     tags: ['Node.js', 'Express.js', 'Kotlin', 'CNN', 'Google Cloud'],
     link: 'https://github.com/Project-Dishcover',
+    color: '#6e8d4d',
   },
   {
     title: 'UjangsTech',
-    titleFull: 'UjangsTech',
-    description:
-      'An Android-based IoT application for real-time air quality monitoring using ESP32, Antares broker, and MQTT protocol. Provides live sensor data and environmental insights.',
+    subtitle: 'Live air-quality monitor',
+    description: 'An Android IoT application for real-time air-quality monitoring using ESP32, Antares broker, and MQTT protocol with live environmental insights.',
     image: ujangImage,
     tags: ['Kodular', 'Antares', 'ESP 32', 'Google Cloud'],
     link: 'https://github.com/Anhar12/UAS-IOT',
+    color: '#4b8794',
   },
   {
     title: 'Fire Alarm',
-    titleFull: 'Fire Alarm',
-    description:
-      'An Android-based IoT fire alarm system that detects indoor fire and identifies the presence of living beings in the room, ensuring early warnings and safety alerts.',
+    subtitle: 'Early-warning IoT system',
+    description: 'An Android IoT fire alarm that detects indoor fire and the presence of living beings, providing early warnings to improve safety.',
     image: fireImage,
     tags: ['Kodular', 'MQTT', 'ESP 32'],
     link: 'https://github.com/Anhar12/pa-praktikum-iot-unmul-b4',
+    color: '#bb5b39',
   },
   {
     title: 'Village Profile',
-    titleFull: 'Teluk Dalam Village Profile',
-    description:
-      'A responsive profile website for Kelurahan Teluk Dalam, providing public information, news, and services to support community engagement and transparency.',
+    subtitle: 'Teluk Dalam Village Profile',
+    description: 'A responsive public-information website for Kelurahan Teluk Dalam, offering news, services, and updates to support community engagement.',
     image: kukarImage,
     tags: ['Javascript', 'Tailwind', 'Vercel'],
     link: 'https://www.telukdalam.my.id/',
+    color: '#6e8d4d',
   },
 ];
 
+function TrailCard({ item, index }) {
+  return (
+    <article className="group relative grid overflow-hidden border border-[#13271d]/25 bg-[#f7f3e8] shadow-[7px_7px_0_#13271d] transition-transform duration-300 hover:-translate-y-2 sm:grid-cols-[.8fr_1.2fr]">
+      <div className="relative min-h-64 overflow-hidden bg-[#13271d] sm:min-h-full">
+        <img src={item.image} alt={item.title} className="absolute inset-0 h-full w-full object-cover transition duration-700 group-hover:scale-110" loading="lazy" />
+        <div className="absolute inset-0 bg-gradient-to-t from-[#13271d]/70 via-transparent to-transparent" />
+        <span className="absolute bottom-4 left-4 grid h-11 w-11 place-items-center rounded-full border-2 border-[#f7f3e8] bg-[#13271d] font-bold text-[#f7f3e8]">0{index + 1}</span>
+        <div className="absolute -right-7 -top-7 h-20 w-20 rounded-full border-[14px] border-[#f7f3e8]/80" />
+      </div>
+
+      <div className="relative p-5 sm:p-6">
+        <span className="absolute right-0 top-0 h-4 w-4 [clip-path:polygon(100%_0,0_0,100%_100%)]" style={{ backgroundColor: item.color }} />
+        <p className="mono-label text-[.58rem]" style={{ color: item.color }}>EXPEDITION MARKER / 0{index + 1}</p>
+        <h3 className="display-face mt-2 text-3xl font-bold leading-none text-[#13271d]">{item.title}</h3>
+        <p className="mt-2 text-xs font-bold uppercase tracking-[.1em] text-[#6e8d4d]">{item.subtitle}</p>
+        <p className="mt-4 text-sm leading-6 text-[#35523d]">{item.description}</p>
+        <div className="mt-5 flex flex-wrap gap-1.5">
+          {item.tags.map((tag) => <span key={tag} className="border border-[#13271d]/25 px-2 py-1 text-[.6rem] font-bold text-[#35523d]">{tag}</span>)}
+        </div>
+        <a href={item.link} target="_blank" rel="noreferrer" className="mt-6 inline-flex items-center gap-2 border-b-2 border-[#13271d] pb-1 text-xs font-bold uppercase tracking-[.12em] text-[#13271d] no-underline transition-colors hover:border-[#c66a45] hover:text-[#c66a45]">
+          Enter this route <HiExternalLink size={16} />
+        </a>
+      </div>
+    </article>
+  );
+}
+
 export default function Portfolio() {
   return (
-    <section id="portfolio" className="py-10 md:py-20 px-6 bg-gray-100 text-slate-800">
-      <div className="max-w-6xl mx-auto">
-        <div className="text-center mb-8 md:mb-12">
-          <h2 className="text-2xl md:text-4xl font-extrabold uppercase text-sky-600">Portfolio</h2>
-          <p className="mt-2 text-slate-500">Some of the projects I've built.</p>
+    <section id="portfolio" className="section-anchor relative overflow-hidden bg-[#dce3c1] py-20 md:py-32">
+      <div className="absolute -right-24 top-1/4 h-[34rem] w-[34rem] rounded-full border-[35px] border-[#6e8d4d]/15" />
+      <div className="relative mx-auto max-w-7xl px-5 md:px-8">
+        <div className="grid gap-8 md:grid-cols-[1fr_.85fr] md:items-end">
+          <div>
+            <p className="section-kicker">04 — Selected coordinates</p>
+            <h2 className="section-title mt-3 text-[#13271d]">The project<br /><em>trail map.</em></h2>
+          </div>
+          <div className="border-l-2 border-[#c66a45] pl-5 text-[#35523d]"><p className="leading-7">A collection of six project routes across enterprise systems, mobile applications, IoT, and public-facing digital services.</p><span className="mono-label mt-4 inline-flex items-center gap-2 text-[.6rem] text-[#6e8d4d]"><HiMap size={16} /> 06 MARKERS DISCOVERED</span></div>
         </div>
 
-        <div className="grid grid-cols-2 md:grid-cols-3 gap-4 md:gap-8 justify-center">
-          {portfolioItems.map((item, idx) => (
-            <div key={idx} className="relative group overflow-hidden rounded-lg shadow-sm hover:shadow-lg transition-all duration-300 border border-slate-200 cursor-pointer">
-              {/* Gambar */}
-              <img src={item.image} alt={item.title} className="w-full h-52 md:h-64 object-cover" loading='lazy'/>
-
-              {/* Judul (di luar overlay) */}
-              <div className="absolute bottom-0 left-0 w-full bg-gradient-to-t from-sky-800/70 via-sky-800/50 to-transparent px-4 pt-3 pb-1 group-hover:opacity-0 transition-opacity duration-300">
-                <h3 className="text-white text-lg font-semibold">{item.title}</h3>
-              </div>
-
-              {/* Overlay */}
-              <div className="absolute inset-0 bg-slate-900/70 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-center items-center text-center px-4 text-white backdrop-blur-sm">
-                <h3 className="text-lg font-semibold mb-2">{item.titleFull}</h3>
-                <p className="text-xs text-slate-200 mb-4">{item.description}</p>
-                <div className="flex flex-wrap justify-center gap-2 mb-4">
-                  {item.tags.map((tag, i) => (
-                    <span
-                      key={i}
-                      className="text-xs bg-white/10 border border-white/30 px-2 py-0.5 rounded-full"
-                    >
-                      {tag}
-                    </span>
-                  ))}
-                </div>
-                
-                <a
-                  href={item.link}
-                  className="relative border-b-[1.5px] border-white text-white flex gap-2 items-center transition-all duration-300 bg-gradient-to-r from-sky-300 to-sky-300 bg-[length:0%_100%] bg-left bg-no-repeat hover:bg-[length:100%_100%] hover:text-transparent bg-clip-text bg-white hover:border-sky-300"
-                >
-                  View Project <i className="fa-solid fa-arrow-right"></i>
-                </a>
-              </div>
-            </div>
-          ))}
+        <div className="relative mt-14 grid gap-10 lg:grid-cols-2">
+          <div className="absolute bottom-2 left-1/2 top-2 hidden border-l-2 border-dashed border-[#6e8d4d]/40 lg:block" />
+          {portfolioItems.map((item, index) => <TrailCard key={item.title} item={item} index={index} />)}
         </div>
+        <a href="#contact" className="forest-button mx-auto mt-14 w-fit">Start a new expedition <HiArrowRight /></a>
       </div>
     </section>
   );

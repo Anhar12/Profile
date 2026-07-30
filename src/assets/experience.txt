@@ -1,0 +1,22 @@
+July 2024 - Till Date
+Remote,
+.NET Developer
+PT. Mitra Transformasi Digital
+Developing Web Apps Shipping Health Integrated Electronic Data (SHIELD) PT. Pertamina
+International Shipping
+Built a web-based Medical Check-Up (MCU) application end-to-end.
+Implemented bulk Excel upload with validation and automated field mapping.
+Processed MCU data into final medical results, including document/certificate
+generation.
+Prepared structured datasets for analytics and Power BI reporting.
+Integrated Pertamina Idaman Login (SSO) authentication.
+Developing Web Application Supply & Distribution One (S&D One) PT. Pertamina Patra
+Niaga
+Developed a full-stack system for supply & distribution operational activity logging.
+Implemented key workflows: Receiving, Storage, and Distribution (with business
+rules & calculations).
+Built dynamic process/activity generation using Stored Procedures and reusable
+templates.
+Implemented file upload/download integrated with Azure Blob Storage. Developed flexible APIs for dynamic request handling.
+Integrated Face Recognition using Azure services and Pertamina Idaman Login (SSO).
+Implemented scheduled background jobs using Hangfire for routine synchronization.

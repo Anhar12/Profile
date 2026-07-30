@@ -1,49 +1,86 @@
+@import url('https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700&family=Playfair+Display:ital,wght@0,600;0,700;0,800;1,600&display=swap');
 @import "tailwindcss";
 
-html,
-body,
-#app {
-  width: 100%;
-  height: 100%;
-  margin: 0;
-  padding: 0;
-  scroll-behavior: smooth;
+/* Design tokens keep the expedition palette consistent across every section. */
+:root {
+  --ink: #13271d;
+  --pine: #1d4532;
+  --moss: #6e8d4d;
+  --fern: #a8bf77;
+  --sand: #e8dfc9;
+  --paper: #f7f3e8;
+  --clay: #c66a45;
 }
+
+html { scroll-behavior: smooth; }
 
 body {
-  font-family: 'Inter', sans-serif;
-}
-
-.hamburger-line {
-  width: 24px;
-  height: 2px;
   margin: 0;
+  min-width: 320px;
+  color: var(--ink);
+  background: var(--paper);
+  font-family: 'DM Sans', sans-serif;
 }
 
-.hamburger-active > span:nth-child(1) {
-  transform: rotate(45deg);
+* { box-sizing: border-box; }
+
+::selection { background: var(--fern); color: var(--ink); }
+
+/* A subtle cartographic grain gives the flat background a tactile quality. */
+.topographic-paper {
+  background-color: var(--paper);
+  background-image:
+    radial-gradient(circle at 1px 1px, rgb(19 39 29 / 0.09) 1px, transparent 0),
+    repeating-radial-gradient(ellipse at 85% 8%, transparent 0 18px, rgb(110 141 77 / 0.08) 19px 20px, transparent 21px 34px);
+  background-size: 18px 18px, 265px 265px;
 }
 
-.hamburger-active > span:nth-child(2) {
-  transform: scale(0);
+.display-face { font-family: 'Playfair Display', serif; }
+.mono-label { font-family: 'DM Mono', monospace; letter-spacing: .14em; }
+
+.forest-button {
+  display: inline-flex;
+  align-items: center;
+  gap: .7rem;
+  border: 1px solid var(--pine);
+  background: var(--pine);
+  color: #fffdf5;
+  padding: .85rem 1.1rem;
+  font-weight: 700;
+  text-decoration: none;
+  transition: transform .25s ease, background .25s ease, box-shadow .25s ease;
 }
 
-.hamburger-active > span:nth-child(3) {
-  transform: rotate(-45deg);
-}
+.forest-button:hover { background: var(--clay); border-color: var(--clay); box-shadow: 5px 5px 0 var(--ink); transform: translate(-2px, -2px); }
+.forest-button:focus-visible, a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visible { outline: 3px solid var(--clay); outline-offset: 3px; }
 
-::-webkit-scrollbar {
-  width: 6px;
-}
+.section-anchor { scroll-margin-top: 82px; }
 
-::-webkit-scrollbar-track {
-  background: #fff;
-}
+/* Reusable compass-style section heading. */
+.section-kicker { color: var(--clay); font: 500 .72rem 'DM Mono', monospace; letter-spacing: .16em; text-transform: uppercase; }
+.section-title { font: 700 clamp(2.25rem, 5vw, 4.4rem)/.98 'Playfair Display', serif; letter-spacing: -.04em; }
 
-::-webkit-scrollbar-thumb {
-  background: linear-gradient(to bottom, #38bdf8, #0ea5e9, #2563eb);
+.field-input {
+  width: 100%;
+  border: 0;
+  border-bottom: 1px solid rgb(19 39 29 / .38);
+  border-radius: 0;
+  background: transparent;
+  padding: .75rem 0;
+  color: var(--ink);
+  font: 500 1rem 'DM Sans', sans-serif;
+  outline: none;
+  transition: border-color .2s ease;
 }
+.field-input:focus { border-color: var(--clay); }
 
-.swal2-confirm {
-  background: #0ea5e9 !important;
+::-webkit-scrollbar { width: 10px; }
+::-webkit-scrollbar-track { background: var(--paper); }
+::-webkit-scrollbar-thumb { border: 3px solid var(--paper); border-radius: 10px; background: var(--pine); }
+
+.swal2-popup { font-family: 'DM Sans', sans-serif !important; }
+.swal2-confirm { background: var(--pine) !important; border-radius: 0 !important; }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { scroll-behavior: auto !important; animation-duration: .01ms !important; transition-duration: .01ms !important; }
 }

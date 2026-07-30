@@ -1,148 +1,63 @@
-import { useState, useEffect } from "react";
+import { useEffect, useState } from 'react';
+import { HiArrowDown, HiMenuAlt3, HiX } from 'react-icons/hi';
+
+const navItems = ['Home', 'About', 'Experience', 'Portfolio', 'Contact'];
 
 export default function Header() {
-  const [isSidebarOpen, setSidebarOpen] = useState(false);
-
-  const toggleSidebar = () => {
-    setSidebarOpen(!isSidebarOpen);
-  };
-
-  const closeSidebar = () => {
-    setSidebarOpen(false);
-  };
+  const [menuOpen, setMenuOpen] = useState(false);
+  const [activeSection, setActiveSection] = useState('home');
 
   useEffect(() => {
-    const handleResize = () => {
-      closeSidebar();
-    };
-
-    window.addEventListener("resize", handleResize);
-    return () => window.removeEventListener("resize", handleResize);
+    const sections = document.querySelectorAll('section[id]');
+    const observer = new IntersectionObserver(
+      (entries) => entries.forEach((entry) => entry.isIntersecting && setActiveSection(entry.target.id)),
+      { threshold: 0.4 },
+    );
+    sections.forEach((section) => observer.observe(section));
+    return () => observer.disconnect();
   }, []);
 
-  const [activeSection, setActiveSection] = useState("home");
-
   useEffect(() => {
-    const sections = document.querySelectorAll("section[id]");
-    const options = {
-      root: null,
-      rootMargin: "0px",
-      threshold: 0.6,
-    };
-
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          setActiveSection(entry.target.id);
-        }
-      });
-    }, options);
-
-    sections.forEach((section) => observer.observe(section));
-
-    return () => {
-      sections.forEach((section) => observer.unobserve(section));
-    };
+    const closeOnResize = () => setMenuOpen(false);
+    window.addEventListener('resize', closeOnResize);
+    return () => window.removeEventListener('resize', closeOnResize);
   }, []);
 
   return (
-    <>
-      {/* Header */}
-      <header className={`fixed top-0 w-full z-50 md:bg-white/70 backdrop-blur md:border-b border-gray-200 shadow-md ${
-        isSidebarOpen ? 'bg-white' : 'bg-white/70'
-      }`}>
-        <div className="md:px-12 px-6 py-4 flex items-center justify-between">
-          <a href="#home" className="text-2xl font-extrabold tracking-tight z-50">
-            <span className="text-sky-600">Anhar's</span>
-            <span className="text-slate-800"> Profile</span>
-          </a>
+    <header className="fixed inset-x-0 top-0 z-50 text-[#f7f3e8]">
+      {/* Layered edges mimic a canopy and keep the navigation visually distinct. */}
+      <div className="absolute inset-0 -z-10 bg-[#0c2419]/95 shadow-[0_7px_0_#6e8d4d,0_11px_0_#13271d] backdrop-blur-md [clip-path:polygon(0_0,100%_0,100%_88%,96%_100%,89%_91%,81%_100%,71%_91%,61%_100%,50%_91%,40%_100%,29%_91%,17%_100%,8%_91%,0_100%)]" />
+      <div className="mx-auto flex max-w-7xl items-center justify-between px-5 py-4 md:px-8">
+        <a href="#home" className="group flex items-center gap-3 no-underline text-inherit" aria-label="Back to home">
+          <span className="grid h-9 w-9 place-items-center rounded-full border border-[#a8bf77] text-[#a8bf77] transition-transform group-hover:rotate-45"><HiArrowDown className="-rotate-45" /></span>
+          <span><span className="block text-sm font-bold leading-none">ANHAR</span><span className="mono-label text-[.55rem] text-[#a8bf77]">FIELD NOTES</span></span>
+        </a>
 
-          <nav className="hidden md:flex items-center gap-12 font-semibold">
-            {["Home", "About", "Portfolio", "Contact"].map((item, idx) => {
-              const id = item.toLowerCase();
-              const isActive = activeSection === id;
-
-              return (
-                <a
-                  key={idx}
-                  href={`#${id}`}
-                  className='relative group no-underline transition duration-300'
-                >
-                  <span
-                    className={`transition-all duration-300 ${
-                      isActive ? 
-                        'bg-gradient-to-r from-sky-400 via-sky-500 to-blue-600 bg-clip-text text-transparent' 
-                        : 
-                        'group-hover:bg-gradient-to-r group-hover:from-sky-400 group-hover:via-sky-500 group-hover:to-blue-600 group-hover:bg-clip-text group-hover:text-transparent'
-                    }`}
-                  >
-                    {item}
-                  </span>
-                  <span
-                    className={`absolute -bottom-1 h-0.5 w-0 bg-gradient-to-r from-sky-400 via-sky-500 to-blue-600 transition-all duration-300 rounded ${
-                      isActive ? 
-                        'w-full left-0' 
-                        : 
-                        'left-1/2 group-hover:w-full group-hover:left-0'
-                    }`}
-                  ></span>
-                </a>
-              );
-            })}
-          </nav>
-
-          <button id="hamburger" type="button" onClick={toggleSidebar} className={`md:hidden z-50 h-[18px] flex flex-col justify-between ${
-            isSidebarOpen ? 'hamburger-active' : ''
-          }`}>
-            <span class={`hamburger-line transition-all duration-300 ease-in-out origin-top-left ${
-              isSidebarOpen ? 'bg-sky-600' : 'bg-slate-800'
-            }`}></span>
-            <span class={`hamburger-line transition-all duration-300 ease-in-out ${
-              isSidebarOpen ? 'bg-sky-600' : 'bg-slate-800'
-            }`}></span>
-            <span class={`hamburger-line transition-all duration-300 ease-in-out origin-bottom-left ${
-              isSidebarOpen ? 'bg-sky-600' : 'bg-slate-800'
-            }`}></span>
-          </button>
-        </div>
-      </header>
-
-      {isSidebarOpen && (
-        <div onClick={closeSidebar} className="fixed inset-0 bg-black/50 z-40"></div>
-      )}
-
-      <aside
-        className={`fixed top-[64px] bg-white backdrop-blur left-0 h-full w-48 z-40 transform transition-transform duration-300 ${
-          isSidebarOpen ? "translate-x-0" : "-translate-x-full"
-        }`}
-      >
-        <nav className="flex flex-col px-6 font-semibold">
-          {["Home", "About", "Portfolio", "Contact"].map((item, idx) => {
+        <nav className="hidden items-center gap-1 rounded-full border border-[#a8bf77]/30 bg-[#1d4532]/70 p-1 md:flex" aria-label="Main navigation">
+          {navItems.map((item) => {
             const id = item.toLowerCase();
-            const isActive = activeSection === id;
-
             return (
               <a
-                key={idx}
+                key={id}
                 href={`#${id}`}
-                className='group border-b border-slate-400 py-4 px-2'
-                onClick={closeSidebar}
+                className={`mono-label rounded-full px-3 py-2 text-[.59rem] no-underline transition-all ${activeSection === id ? 'bg-[#a8bf77] text-[#13271d]' : 'text-[#f7f3e8] hover:bg-[#6e8d4d] hover:text-white'}`}
               >
-                <span
-                  className={`transition-all duration-300 ${
-                    isActive ? 
-                      'bg-gradient-to-r from-sky-400 via-sky-500 to-blue-600 bg-clip-text text-transparent' 
-                      : 
-                      'group-hover:bg-gradient-to-r group-hover:from-sky-400 group-hover:via-sky-500 group-hover:to-blue-600 group-hover:bg-clip-text group-hover:text-transparent'
-                  }`}
-                >
-                  {item}
-                </span>
+                {item}
               </a>
             );
           })}
         </nav>
-      </aside>
-    </>
+
+        <button type="button" onClick={() => setMenuOpen((open) => !open)} className="grid h-10 w-10 place-items-center border border-[#a8bf77]/60 text-[#f7f3e8] md:hidden" aria-expanded={menuOpen} aria-label="Toggle navigation">
+          {menuOpen ? <HiX size={22} /> : <HiMenuAlt3 size={23} />}
+        </button>
+      </div>
+
+      {menuOpen && <nav className="mt-1 bg-[#0c2419] px-5 py-4 shadow-[0_7px_0_#6e8d4d] md:hidden" aria-label="Mobile navigation">
+        <div className="mx-auto flex max-w-7xl flex-col">
+          {navItems.map((item) => <a key={item} href={`#${item.toLowerCase()}`} onClick={() => setMenuOpen(false)} className="border-b border-[#f7f3e8]/15 py-3 text-sm font-semibold no-underline text-[#f7f3e8] hover:text-[#a8bf77]">{item}</a>)}
+        </div>
+      </nav>}
+    </header>
   );
 }
