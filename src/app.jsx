@@ -6,16 +6,5 @@ import Footer from './components/Footer.jsx';
 import Contact from './components/Contact.jsx';
 
 export default function App() {
-  return (
-    <div className="bg-gray-50 text-slate-800 min-h-screen">
-      <Header />
-      <main className="">
-        <Home />
-        <About />
-        <Portofolio />
-        <Contact />
-      </main>
-      <Footer />
-    </div>
-  );
+  return <div className="min-h-screen overflow-x-hidden bg-[#090b10] text-[#e9edf4]"><Header /><main><Home /><About /><Portofolio /><Contact /></main><Footer /></div>;
 }

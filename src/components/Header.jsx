@@ -1,148 +1,52 @@
-import { useState, useEffect } from "react";
+import { useEffect, useState } from 'react';
+import { HiArrowNarrowUp, HiMenuAlt3, HiX } from 'react-icons/hi';
+
+const links = ['Home', 'About', 'Portfolio', 'Contact'];
 
 export default function Header() {
-  const [isSidebarOpen, setSidebarOpen] = useState(false);
-
-  const toggleSidebar = () => {
-    setSidebarOpen(!isSidebarOpen);
-  };
-
-  const closeSidebar = () => {
-    setSidebarOpen(false);
-  };
+  const [open, setOpen] = useState(false);
+  const [active, setActive] = useState('home');
 
   useEffect(() => {
-    const handleResize = () => {
-      closeSidebar();
-    };
+    // Track the visible section to highlight the active navigation item.
+    const observer = new IntersectionObserver(
+      (entries) => entries.forEach((entry) => entry.isIntersecting && setActive(entry.target.id)),
+      { threshold: 0.45 },
+    );
 
-    window.addEventListener("resize", handleResize);
-    return () => window.removeEventListener("resize", handleResize);
-  }, []);
-
-  const [activeSection, setActiveSection] = useState("home");
-
-  useEffect(() => {
-    const sections = document.querySelectorAll("section[id]");
-    const options = {
-      root: null,
-      rootMargin: "0px",
-      threshold: 0.6,
-    };
-
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          setActiveSection(entry.target.id);
-        }
-      });
-    }, options);
-
-    sections.forEach((section) => observer.observe(section));
-
-    return () => {
-      sections.forEach((section) => observer.unobserve(section));
-    };
+    document.querySelectorAll('section[id]').forEach((section) => observer.observe(section));
+    return () => observer.disconnect();
   }, []);
 
   return (
-    <>
-      {/* Header */}
-      <header className={`fixed top-0 w-full z-50 md:bg-white/70 backdrop-blur md:border-b border-gray-200 shadow-md ${
-        isSidebarOpen ? 'bg-white' : 'bg-white/70'
-      }`}>
-        <div className="md:px-12 px-6 py-4 flex items-center justify-between">
-          <a href="#home" className="text-2xl font-extrabold tracking-tight z-50">
-            <span className="text-sky-600">Anhar's</span>
-            <span className="text-slate-800"> Profile</span>
-          </a>
+    <header className="fixed inset-x-0 top-0 z-50 px-4 pt-4 md:px-8">
+      <div className="mx-auto flex max-w-7xl items-center justify-between rounded-2xl border border-white/10 bg-[#10131b]/85 px-5 py-3 backdrop-blur-xl md:px-6">
+        <a href="#home" className="flex items-center gap-2 font-extrabold tracking-[-.06em]">
+          <span className="grid h-7 w-7 place-items-center rounded-lg bg-[#3f6fa8] text-xs text-white">A</span>
+          <span>ANHAR<span className="text-[#a8b0c3]">.DEV</span></span>
+        </a>
 
-          <nav className="hidden md:flex items-center gap-12 font-semibold">
-            {["Home", "About", "Portfolio", "Contact"].map((item, idx) => {
-              const id = item.toLowerCase();
-              const isActive = activeSection === id;
-
-              return (
-                <a
-                  key={idx}
-                  href={`#${id}`}
-                  className='relative group no-underline transition duration-300'
-                >
-                  <span
-                    className={`transition-all duration-300 ${
-                      isActive ? 
-                        'bg-gradient-to-r from-sky-400 via-sky-500 to-blue-600 bg-clip-text text-transparent' 
-                        : 
-                        'group-hover:bg-gradient-to-r group-hover:from-sky-400 group-hover:via-sky-500 group-hover:to-blue-600 group-hover:bg-clip-text group-hover:text-transparent'
-                    }`}
-                  >
-                    {item}
-                  </span>
-                  <span
-                    className={`absolute -bottom-1 h-0.5 w-0 bg-gradient-to-r from-sky-400 via-sky-500 to-blue-600 transition-all duration-300 rounded ${
-                      isActive ? 
-                        'w-full left-0' 
-                        : 
-                        'left-1/2 group-hover:w-full group-hover:left-0'
-                    }`}
-                  ></span>
-                </a>
-              );
-            })}
-          </nav>
-
-          <button id="hamburger" type="button" onClick={toggleSidebar} className={`md:hidden z-50 h-[18px] flex flex-col justify-between ${
-            isSidebarOpen ? 'hamburger-active' : ''
-          }`}>
-            <span class={`hamburger-line transition-all duration-300 ease-in-out origin-top-left ${
-              isSidebarOpen ? 'bg-sky-600' : 'bg-slate-800'
-            }`}></span>
-            <span class={`hamburger-line transition-all duration-300 ease-in-out ${
-              isSidebarOpen ? 'bg-sky-600' : 'bg-slate-800'
-            }`}></span>
-            <span class={`hamburger-line transition-all duration-300 ease-in-out origin-bottom-left ${
-              isSidebarOpen ? 'bg-sky-600' : 'bg-slate-800'
-            }`}></span>
-          </button>
-        </div>
-      </header>
-
-      {isSidebarOpen && (
-        <div onClick={closeSidebar} className="fixed inset-0 bg-black/50 z-40"></div>
-      )}
-
-      <aside
-        className={`fixed top-[64px] bg-white backdrop-blur left-0 h-full w-48 z-40 transform transition-transform duration-300 ${
-          isSidebarOpen ? "translate-x-0" : "-translate-x-full"
-        }`}
-      >
-        <nav className="flex flex-col px-6 font-semibold">
-          {["Home", "About", "Portfolio", "Contact"].map((item, idx) => {
-            const id = item.toLowerCase();
-            const isActive = activeSection === id;
-
-            return (
-              <a
-                key={idx}
-                href={`#${id}`}
-                className='group border-b border-slate-400 py-4 px-2'
-                onClick={closeSidebar}
-              >
-                <span
-                  className={`transition-all duration-300 ${
-                    isActive ? 
-                      'bg-gradient-to-r from-sky-400 via-sky-500 to-blue-600 bg-clip-text text-transparent' 
-                      : 
-                      'group-hover:bg-gradient-to-r group-hover:from-sky-400 group-hover:via-sky-500 group-hover:to-blue-600 group-hover:bg-clip-text group-hover:text-transparent'
-                  }`}
-                >
-                  {item}
-                </span>
-              </a>
-            );
-          })}
+        <nav className="hidden items-center gap-7 md:flex">
+          {links.map((item) => (
+            <a key={item} href={`#${item.toLowerCase()}`} className={`text-sm font-semibold transition-colors ${active === item.toLowerCase() ? 'text-[#86a9d8]' : 'text-[#9ba4b7] hover:text-white'}`}>
+              {item}
+            </a>
+          ))}
         </nav>
-      </aside>
-    </>
+
+        <a href="#contact" className="hidden items-center gap-1 rounded-lg bg-[#3f6fa8] px-4 py-2 text-xs font-bold text-white transition hover:bg-[#5589c7] md:flex">
+          Let's talk <HiArrowNarrowUp size={16} />
+        </a>
+        <button aria-label="Toggle navigation" onClick={() => setOpen(!open)} className="text-2xl md:hidden">
+          {open ? <HiX /> : <HiMenuAlt3 />}
+        </button>
+      </div>
+
+      {open && (
+        <nav className="mx-auto mt-2 flex max-w-7xl flex-col rounded-2xl border border-white/10 bg-[#10131b] p-4 shadow-xl md:hidden">
+          {links.map((item) => <a key={item} onClick={() => setOpen(false)} href={`#${item.toLowerCase()}`} className="border-b border-[#d9ded8] px-3 py-3 text-sm font-bold last:border-0">{item}</a>)}
+        </nav>
+      )}
+    </header>
   );
 }
