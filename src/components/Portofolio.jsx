@@ -1,4 +1,4 @@
-import { HiArrowNarrowUp } from 'react-icons/hi';
+import { HiArrowNarrowUp, HiArrowRight } from 'react-icons/hi';
 import pisImage from '../assets/pis.jpeg';
 import sndImage from '../assets/snd.png';
 import dishcoverImage from '../assets/dishcover.jpeg';
@@ -16,33 +16,6 @@ const items = [
   { title: 'Village Profile', full: 'Teluk Dalam Village Profile', description: 'A public-information website for Kelurahan Teluk Dalam.', image: kukarImage, tags: ['Javascript', 'Tailwind', 'Vercel'], link: 'https://www.telukdalam.my.id/' },
 ];
 
-function TrailCard({ item, index }) {
-  return (
-    <article className="group relative grid overflow-hidden border border-[#13271d]/25 bg-[#f7f3e8] shadow-[7px_7px_0_#13271d] transition-transform duration-300 hover:-translate-y-2 sm:grid-cols-[.8fr_1.2fr]">
-      <div className="relative min-h-64 overflow-hidden bg-[#13271d] sm:min-h-full">
-        <img src={item.image} alt={item.title} className="absolute inset-0 h-full w-full object-cover transition duration-700 group-hover:scale-110" loading="lazy" />
-        <div className="absolute inset-0 bg-gradient-to-t from-[#13271d]/70 via-transparent to-transparent" />
-        <span className="absolute bottom-4 left-4 grid h-11 w-11 place-items-center rounded-full border-2 border-[#f7f3e8] bg-[#13271d] font-bold text-[#f7f3e8]">0{index + 1}</span>
-        <div className="absolute -right-7 -top-7 h-20 w-20 rounded-full border-[14px] border-[#f7f3e8]/80" />
-      </div>
-
-      <div className="relative p-5 sm:p-6">
-        <span className="absolute right-0 top-0 h-4 w-4 [clip-path:polygon(100%_0,0_0,100%_100%)]" style={{ backgroundColor: item.color }} />
-        <p className="mono-label text-[.58rem]" style={{ color: item.color }}>EXPEDITION MARKER / 0{index + 1}</p>
-        <h3 className="display-face mt-2 text-3xl font-bold leading-none text-[#13271d]">{item.title}</h3>
-        <p className="mt-2 text-xs font-bold uppercase tracking-[.1em] text-[#6e8d4d]">{item.subtitle}</p>
-        <p className="mt-4 text-sm leading-6 text-[#35523d]">{item.description}</p>
-        <div className="mt-5 flex flex-wrap gap-1.5">
-          {item.tags.map((tag) => <span key={tag} className="border border-[#13271d]/25 px-2 py-1 text-[.6rem] font-bold text-[#35523d]">{tag}</span>)}
-        </div>
-        <a href={item.link} target="_blank" rel="noreferrer" className="mt-6 inline-flex items-center gap-2 border-b-2 border-[#13271d] pb-1 text-xs font-bold uppercase tracking-[.12em] text-[#13271d] no-underline transition-colors hover:border-[#c66a45] hover:text-[#c66a45]">
-          Enter this route <HiExternalLink size={16} />
-        </a>
-      </div>
-    </article>
-  );
-}
-
 export default function Portfolio() {
   return (
     <section id="portfolio" className="portfolio-surface px-5 py-20 md:px-10 md:py-28">
@@ -57,7 +30,7 @@ export default function Portfolio() {
         <div className="grid gap-x-8 gap-y-14 md:grid-cols-2 lg:grid-cols-12">
           {items.map((item, index) => <ProjectCard key={item.title} item={item} index={index} />)}
         </div>
-        <a href="#contact" className="forest-button mx-auto mt-14 w-fit">Start a new expedition <HiArrowRight /></a>
+        <a href="#contact" className="mx-auto mt-14 flex w-fit items-center gap-2 rounded-xl border border-[#86a9d8]/50 px-5 py-3 text-sm font-bold text-[#e9edf4] transition hover:border-[#86a9d8] hover:bg-[#3f6fa8]/15 hover:text-[#a9c9f4]">Start a new project <HiArrowRight /></a>
       </div>
     </section>
   );

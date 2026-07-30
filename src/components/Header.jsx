@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { HiArrowNarrowUp, HiMenuAlt3, HiX } from 'react-icons/hi';
 
-const links = ['Home', 'About', 'Portfolio', 'Contact'];
+const links = ['Home', 'About', 'Experience', 'Portfolio', 'Contact'];
 
 export default function Header() {
   const [open, setOpen] = useState(false);
