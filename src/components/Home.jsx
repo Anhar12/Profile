@@ -13,9 +13,9 @@ export default function Home() {
           <div className="mt-14 grid max-w-md grid-cols-2 border-y-2 border-[#202321] py-4"><div className="border-r-2 border-[#202321]"><b className="hand block text-3xl leading-none">06+</b><span className="mono text-[9px] uppercase tracking-wider">Selected projects</span></div><div className="pl-5"><b className="hand block text-3xl leading-none">Full-stack</b><span className="mono text-[9px] uppercase tracking-wider">Developer focus</span></div></div>
         </div>
         <div className="enter enter-delay relative mx-auto w-full max-w-sm lg:max-w-none">
-          <div className="relative border-2 border-[#202321] bg-[#dfe1da] p-3 shadow-[5px_5px_0_#202321]">
+          <div className="relative border-2 border-[#202321] bg-[#dfe1da] p-3 shadow-[5px_5px_0_#202321] group">
             <div className="absolute -left-2 -top-2 border-2 border-[#202321] bg-[#68bcb9] px-2 py-1 mono text-[9px] uppercase">profile / 01</div>
-            <img src={anharImg} alt="Anhar Khoirun Najib" className="aspect-[4/5] w-full border border-[#202321] object-cover object-top grayscale contrast-125" />
+            <img src={anharImg} alt="Anhar Khoirun Najib" className="aspect-[4/5] w-full border border-[#202321] object-cover object-top grayscale-50 contrast-125 group-hover:grayscale-0 transition-color duration-500" />
             <div className="mt-3 flex items-center justify-between border-t-2 border-[#202321] pt-2"><span className="mono text-[9px] uppercase tracking-wider">Based in Samarinda, ID</span><span className="hand text-lg">web dev</span></div>
           </div>
         </div>
